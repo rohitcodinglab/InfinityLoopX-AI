@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RK AI</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<!-- AUTHENTICATION SCREEN -->
+<div class="auth-screen" id="authScreen">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            <i class="fa-solid fa-robot"></i>
+            <h2>InfinityLoopX AI</h2>
+        </div>
+
+        <div class="auth-heading">
+            <h1 id="authTitle">Welcome Back!</h1>
+            <p id="authSubtitle">Login to continue to your AI assistant.</p>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm">
+
+            <div class="auth-field">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail"
+                       placeholder="Enter your email" required>
+            </div>
+
+            <div class="auth-field">
+                <label>Password</label>
+                <input type="password" id="loginPassword"
+                       placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="auth-submit">
+                Sign In
+            </button>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <button type="button" id="showSignup">Sign Up</button>
+            </p>
+
+        </form>
+
+        <!-- SIGNUP FORM -->
+        <form id="signupForm" style="display:none;">
+
+            <div class="auth-field">
+                <label>Full Name</label>
+                <input type="text" id="signupName"
+                       placeholder="Enter your name" required>
+            </div>
+
+            <div class="auth-field">
+                <label>Email Address</label>
+                <input type="email" id="signupEmail"
+                       placeholder="Enter your email" required>
+            </div>
+
+            <div class="auth-field">
+                <label>Password</label>
+                <input type="password" id="signupPassword"
+                       placeholder="Create a password"
+                       minlength="8" required>
+            </div>
+
+            <button type="submit" class="auth-submit">
+                Create Account
+            </button>
+
+            <p class="auth-switch">
+                Already have an account?
+                <button type="button" id="showLogin">Sign In</button>
+            </p>
+
+        </form>
+
+        <p id="authMessage" class="auth-message"></p>
+
+        <div class="auth-footer">
+            Secure AI Workspace · InfinityLoopX
+        </div>
+
+    </div>
+
+</div>
+
+<div class="app" id="chatApp" style="display:none;">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-top">
+
+            <div class="logo">
+                <i class="fa-solid fa-robot"></i>
+                <h2>infinityloopx</h2>
+            </div>
+
+            <button id="closeSidebar" class="close-sidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <button id="newChatBtn" class="new-chat">
+            <i class="fa-solid fa-plus"></i>
+            <span>New Chat</span>
+        </button>
+
+        <div class="menu">
+
+            <button class="menu-item active">
+                <i class="fa-regular fa-comment"></i>
+                <span>Chats</span>
+            </button>
+
+            <button class="menu-item">
+                <i class="fa-regular fa-file"></i>
+                <span>Projects</span>
+            </button>
+
+            <button class="menu-item">
+                <i class="fa-solid fa-book"></i>
+                <span>Knowledge Base</span>
+            </button>
+
+            <button class="menu-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </button>
+
+        </div>
+        <div class="search-box">
+
+    <input
+    type="text"
+    placeholder="Search chats..."
+    onkeyup="searchChats(this.value)">
+
+</div>
+
+        <div class="chat-history">
+
+            <h4>Recent Chats</h4>
+
+            <ul id="chatList">
+
+            </ul>
+
+        </div>
+
+        <div class="profile">
+
+            <div class="profile-avatar">
+                RK
+            </div>
+
+            <div class="profile-info">
+                <h3>RohitKumar</h3>
+                <p>Free Plan</p>
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- Overlay -->
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ================= Main ================= -->
+
+    <main class="main">
+
+        <!-- Header -->
+
+        <header class="header">
+
+            <button id="menuBtn" class="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <h2 id="chatTitle">
+                New Chat
+            </h2>
+
+            <div class="header-actions">
+
+                <button>
+                    <i class="fa-regular fa-sun"></i>
+                </button>
+
+                <button>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- Chat -->
+
+        <section class="chat-container" id="messages">
+
+            <!-- Welcome Screen -->
+
+            <div class="welcome">
+
+                <div class="welcome-icon">
+                    🤖
+                </div>
+
+                <h1>Hello, RK 👋</h1>
+
+                <p>
+                    How can I help you today?
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Input -->
+
+        <footer class="chat-input">
+
+            <button class="icon-btn">
+
+                <i class="fa-solid fa-paperclip"></i>
+
+            </button>
+
+            <input
+            type="text"
+            id="userInput"
+            placeholder="Message AI Chat...">
+
+            <button id="sendBtn" class="send-btn">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+            </button>
+
+        </footer>
+
+    </main>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
